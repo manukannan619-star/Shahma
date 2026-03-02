@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+        }
+
+        /* This makes the image cover the whole screen */
+        .background {
+            background-image: url('i3~2.jpg'); 
+            background-size: cover;
+            background-position: right;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center; /* Vertical center */
+            justify-content: flex-start; /* Horizontal left */
+            padding-left: 100px;
+        }
+
+        .btn-yes {
+            display: inline-block;
+            background-color: #7ccb68; /* That specific green from the image */
+            color: white;
+            text-decoration: none;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.2s, filter 0.2s;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        .btn-yes:active {
+            transform: scale(0.95);
+        }
+
+        /* Mobile adjustment */
+        @media (max-width: 600px) {
+            .background {
+                padding-right: 20px;
+            }
+            .btn-yes {
+                font-size: 1.5rem;
+                padding: 15px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background">
+        <a href="land.html" class="btn-yes">OK  😃</a>
+    </div>
+
+</body>
+</html>

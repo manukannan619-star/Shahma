@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Birthday Letter</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 100%);
+            --env-color: #ff85a2;
+            --env-dark: #f76c8e;
+            --text-color: #4a4a4a;
+        }
+
+        /* --- Balloon Animation Styles --- */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            font-size: 2rem;
+            user-select: none;
+            z-index: 1;
+            animation: floatUp linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+
+        @keyframes glowPulse {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #ff85a2, 0 0 15px #ff85a2;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #f76c8e, 0 0 30px #f76c8e;
+                transform: scale(1.02); /* Subtle pulse for long text */
+            }
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: var(--env-color);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 1s ease-in-out;
+            z-index: 10;
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-top: 110px solid var(--env-dark);
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 20;
+        }
+
+        .letter {
+            position: absolute;
+            width: 280px;
+            height: 180px;
+            background: white;
+            padding: 40px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 15;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            visibility: hidden;
+        }
+
+        .letter img {
+            width: 250px;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s 1s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .letter h1 {
+            font-size: .6rem; /* Adjusted for longer text */
+            line-height: 1.5;
+            color: #d81b60;
+            text-transform: uppercase;
+            margin: 10px 0;
+            opacity: 0;
+            transform: scale(0.5) translateY(20px); 
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1.4s;
+        }
+
+        .scene.open .envelope {
+            transform: translateY(150%) scale(0.5);
+            opacity: 0;
+        }
+
+        .scene.open .envelope::before {
+            transform: rotateX(180deg);
+        }
+
+        .scene.open .letter {
+            visibility: visible;
+            opacity: 1;
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+            max-height: 800px;
+            transform: translateY(0);
+            z-index: 100;
+        }
+
+        .scene.open .letter img {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scene.open .letter h1 {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            animation: glowPulse 2s ease-in-out infinite alternate;
+        }
+
+        .btn-container {
+            position: absolute;
+            bottom: 10%;
+            z-index: 200;
+        }
+
+        .open-btn {
+            background-color: var(--env-dark);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(247, 108, 142, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .open-btn:active { transform: scale(0.95); }
+        .scene.open ~ .btn-container .open-btn { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="balloon-container"></div>
+
+    <div class="scene" id="birthdayScene">
+        <div class="envelope"></div>
+        
+        <div class="letter">
+            <img src="i1.jpg" alt="Girl reading a book">
+            <h1>The world is a book,<br>and every year is a new chapter.<br> 
+            <span style="font-size: 1.4rem;">Happy Birthday Shahma</span><br> 
+             a true explorer of stories. <br> 
+<br><br>
+I love you girl, stay strong and healthy, Wishing you all the happiness in the world 💋
+ </h1>
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <button class="open-btn" onclick="openMessage()">Open Your Letter ✉️</button>
+    </div>
+
+    <script>
+        function openMessage() {
+            document.getElementById('birthdayScene').classList.add('open');
+            createBalloons(25); 
+        }
+
+        function createBalloons(num) {
+            const container = document.getElementById('balloon-container');
+            const emojis = ['🎂', '💖','📖', '🎈', '🌸', '📚'];
+            
+            for (let i = 0; i < num; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                const leftPos = Math.random() * 100;
+                const duration = 6 + Math.random() * 6; 
+                const delay = Math.random() * 5;
+                
+                balloon.style.left = leftPos + 'vw';
+                balloon.style.animationDuration = duration + 's';
+                balloon.style.animationDelay = delay + 's';
+                
+                container.appendChild(balloon);
+            }
+        }
+    </script>
+
+</body>
+</html>

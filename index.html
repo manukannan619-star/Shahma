@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You Excited?</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #f3e5f5; 
+        }
+
+        .background-container {
+            /* Make sure your image is named 'teddy.jpg' in the same folder */
+            background-image: url('i2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: flex-end; /* Keeps buttons near the bottom */
+            justify-content: flex-start; /* MOVED TO LEFT */
+            padding-left: 50px; /* Space from the left edge */
+        }
+
+        .button-wrapper {
+            display: flex;
+            flex-direction: row; /* Stacked buttons look better on the left */
+            gap: 55px;
+            margin-bottom: 90px; 
+            width: 250px; /* Fixed width for a neat column */
+        }
+
+        .btn {
+            padding: 18px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s, filter 0.2s;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-yes {
+            background-color: #7ccb68;
+        }
+
+        .btn-no {
+            background-color: #f67e56;
+        }
+
+        .btn:hover {
+            transform: translateX(10px); /* Slides slightly right on hover */
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Adjustments for mobile phones */
+        @media (max-width: 600px) {
+            .background-container {
+                padding-left: 20px;
+                justify-content: center; /* Centers back on mobile for better fit */
+            }
+            .button-wrapper {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-container">
+        <div class="button-wrapper">
+            <a href="land.html" class="btn btn-yes">Yes 😃</a>
+            <a href="nol.html" class="btn btn-no">No 🥱 </a>
+        </div>
+    </div>
+
+</body>
+</html>
